@@ -1,14 +1,24 @@
 const inputBtn = document.getElementById("input-btn");
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
-let myLeads = ["lead1", "lead2", "lead3"];
+let myLeads = [];
 
 inputBtn.addEventListener("click", function(){
-    console.log("Button clicked!");
     myLeads.push(inputEl.value);
-    ulEl.innerHTML += `<li>${myLeads[myLeads.length - 1]}</li>` 
     inputEl.value = "";
+    renderLeads()
 });
+
+function renderLeads(){
+    let listItems = "";
+    for (let i = 0; i < myLeads.length; i++) {
+        listItems += `<li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">${myLeads[i]}</a></li>` 
+        
+    } 
+    ulEl.innerHTML = listItems
+}
+
+
 
 
 
