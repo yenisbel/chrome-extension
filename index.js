@@ -10,8 +10,6 @@ let myLeads = [];
 if(leadsFromLocal){
     myLeads = leadsFromLocal
     render(myLeads)
-}else{
-    console.log("No leads to show yet")
 }
 
 function render(paramLeads){
