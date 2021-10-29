@@ -2,7 +2,7 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 1;
     padding: 10px;
-    min-width: 400px;
+    min-width: 500px;
 }
 
 input {
@@ -16,7 +16,7 @@ input {
 button {
     background: #5f9341;
     color: white;
-    padding: 10 10 10 10;
+    padding: 10px 20px;
     font-weight: bold;
     font-size: 20px;
     border: 1px solid#5f9341;

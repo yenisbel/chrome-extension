@@ -1,40 +1,48 @@
 const inputBtn = document.getElementById("input-btn");
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
+const tabBtn = document.getElementById("tab-btn")
 const deleteBtn = document.getElementById("delete-btn");
+const leadsFromLocal = JSON.parse(localStorage.getItem("Lead"));
+
 let myLeads = [];
-let leadsFromLocal = JSON.parse(localStorage.getItem("Lead"));
 
 if(leadsFromLocal){
     myLeads = leadsFromLocal
-    renderLeads()
+    render(myLeads)
 }else{
     console.log("No leads to show yet")
 }
 
+function render(paramLeads){
+    let listItems = "";
+    for (let i = 0; i < paramLeads.length; i++) {
+        listItems += `<li><a href="${paramLeads[i]}" target="_blank" rel="noopener noreferrer">${paramLeads[i]}</a></li>`   
+    } 
+    ulEl.innerHTML = listItems;
+}
+
+tabBtn.addEventListener("click", function(){
+    let queryOptions = { active: true, currentWindow: true}
+    chrome.tabs.query(queryOptions, function(tabs){
+        myLeads.push(tabs[0].url);
+        localStorage.setItem("Lead", JSON.stringify(myLeads));
+        render(myLeads)
+    });
+})
 
 inputBtn.addEventListener("click", function(){
     myLeads.push(inputEl.value);
     localStorage.setItem("Lead", JSON.stringify(myLeads));
     inputEl.value = "";
-    renderLeads()
+    render(myLeads)
 });
 
-deleteBtn.addEventListener("click", function(){
-    myLeads = [];
-    ulEl.innerHTML = "";
+deleteBtn.addEventListener("dblclick", function(){
     localStorage.clear();
-    leadsFromLocal = []
+    myLeads = [];
+    render(myLeads)
 })
-
-function renderLeads(){
-    let listItems = "";
-    for (let i = 0; i < myLeads.length; i++) {
-        listItems += `<li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">${myLeads[i]}</a></li>` 
-        
-    } 
-    ulEl.innerHTML = listItems;
-}
 
 
 
